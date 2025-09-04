@@ -1,16 +1,22 @@
 "use client";
 import React, { useState } from "react";
+import { DateItem } from "../page";
 
 interface DateInputProps {
-    setFinalData: (val: string[]) => void;
+    setInitialData: (val: { date: string }[]) => void;
 }
 
-const DateInput: React.FC<DateInputProps> = ({ setFinalData }) => {
+const DateInput: React.FC<DateInputProps> = ({ setInitialData }) => {
     const [input, setInput] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value);
-        setFinalData(e.target.value.split("\n").map(d => d.trim()).filter(Boolean));
+        const data = e.target.value
+            .split("\n")
+            .map((d) => d.trim())
+            .filter(Boolean)
+            .map((d) => ({ date: d }));
+        setInitialData(data);
     };
 
     return (
