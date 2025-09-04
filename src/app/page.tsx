@@ -2,7 +2,7 @@
 import DateInput from "./components/DateInput";
 import GroupSelect from "./components/GroupSelect";
 import BarChartView from "./components/BarChartView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
@@ -83,12 +83,18 @@ export default function Home() {
     setActiveView(true);
   };
 
+  useEffect(() => {
+    if (!initialData || initialData.length === 0) {
+      return;
+    }
+    handleSubmit();
+  }, [groupCount]);
+
   return (
     <div className="bg-gray-800 min-h-screen py-10 px-4">
       {!activeView ? (
         <>
           <DateInput setInitialData={setInitialData} />
-          <GroupSelect value={groupCount} onChange={setGroupCount} />
           <button
             onClick={handleSubmit}
             className="w-[10rem] mx-auto block cursor-pointer py-3 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold rounded-lg shadow-md"
@@ -97,7 +103,10 @@ export default function Home() {
           </button>
         </>
       ) : (
-        <BarChartView data={finalData} goBack={() => setActiveView(false)} totalOrder={initialData?.length}/>
+        <>
+          <GroupSelect value={groupCount} onChange={setGroupCount} />
+          <BarChartView data={finalData} goBack={() => setActiveView(false)} totalOrder={initialData?.length} />
+        </>
       )}
     </div>
   );
