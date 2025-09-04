@@ -5,6 +5,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import BarChartView from "./components/BarChartView";
 dayjs.extend(isSameOrBefore);
 
 dayjs.extend(customParseFormat);
@@ -83,14 +84,15 @@ export default function Home() {
 
   return (
     <div className="bg-gray-800 min-h-screen py-10 px-4">
-      <DateInput setFinalData={setFinalData} />
+      {/* <DateInput setFinalData={setFinalData} />
       <GroupSelect value={groupCount} onChange={setGroupCount} />
       <button
         onClick={handleSubmit}
         className="w-[10rem] mx-auto block cursor-pointer py-3 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold rounded-lg shadow-md"
       >
         Submit
-      </button>
+      </button> */}
+      <BarChartView />
     </div>
   );
 }
