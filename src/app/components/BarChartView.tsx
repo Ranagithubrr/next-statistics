@@ -29,10 +29,15 @@ const COLORS = ["#3b82f6", "#06b6d4", "#facc15", "#f87171", "#34d399", "#a78bfa"
 const BarChartView: React.FC<BarDataProps> = ({ data, totalOrder, goBack }) => {
     return (
         <div className="w-full bg-[#1E2939] p-4 rounded-xl space-y-8">
-            <div>
+            <div className="flex justify-between">
                 <span className="text-gray-100">
                     Total Order Count:{" "}
                     <span className="text-3xl font-semibold text-cyan-400">{totalOrder}</span>
+                </span>
+                <span className="text-gray-100">
+                    Estimate Earnings{" "}
+                    <span className="text-3xl font-semibold text-cyan-400"> {totalOrder * 500} </span>
+                    BDT
                 </span>
             </div>
 
